@@ -101,6 +101,11 @@ bpwatch stop pre_compile
 
 # Install libjpeg
 curl --remote-name http://www.ijg.org/files/jpegsrc.v9a.tar.gz
+if [ $? != 0 ]; then
+  puts-warn "libjpeg is not available for this stack ($STACK)."
+  puts-warn "Aborting."
+  exit 1
+fi
 tar -xzvf jpegsrc.v9a.tar.gz
 if [ $? != 0 ]; then
   puts-warn "libjpeg is not available for this stack ($STACK)."
