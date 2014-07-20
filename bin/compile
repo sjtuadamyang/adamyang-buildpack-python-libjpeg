@@ -226,6 +226,9 @@ fi
 # If Pip isn't up to date:
 if [ "$FRESH_PYTHON" ] || [[ ! $(pip --version) == *$PIP_VERSION* ]]; then
   WORKING_DIR=$(pwd)
+  mkdir $USER_DIR/lib/python
+  mkdir $USER_DIR/bin
+  mkdir $USER_DIR/include/python/distname
 
   bpwatch start prepare_environment
 
