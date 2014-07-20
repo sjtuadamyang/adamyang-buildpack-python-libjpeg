@@ -283,13 +283,12 @@ fi
 # Install dependencies with Pip.
 puts-step "Installing dependencies with pip"
 
-cat requirements.txt
-cat /app/requirements.txt
+cd /app
 
 [ ! "$FRESH_PYTHON" ] && bpwatch start pip_install
 [ "$FRESH_PYTHON" ] && bpwatch start pip_install_first
 
-pip install -r requirements.txt --exists-action=w --src=/app/.heroku/src --allow-all-external  | cleanup | indent
+pip install -r requirements.txt --exists-action=w --src=./.heroku/src --allow-all-external  | cleanup | indent
 
 [ ! "$FRESH_PYTHON" ] && bpwatch stop pip_install
 [ "$FRESH_PYTHON" ] && bpwatch stop pip_install_first
