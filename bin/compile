@@ -91,6 +91,7 @@ BUILD_DIR=$APP_DIR
 # Prepend proper path buildpack use.
 export PATH=$BUILD_DIR/.heroku/python/bin:$BUILD_DIR/.heroku/vendor/bin:$PATH
 export PYTHONUNBUFFERED=1
+export PYTHONPATH=$BUILD_DIR:$PYTHONPATH
 export LANG=en_US.UTF-8
 export C_INCLUDE_PATH=/app/.heroku/vendor/include:$BUILD_DIR/.heroku/vendor/include:/app/.heroku/python/include
 export CPLUS_INCLUDE_PATH=/app/.heroku/vendor/include:$BUILD_DIR/.heroku/vendor/include:/app/.heroku/python/include
@@ -111,7 +112,7 @@ if [ $? != 0 ]; then
   exit 1
 fi
 cd jpeg-9a
-./configure --prefix=$USER_DIR/lib
+./configure --prefix=$USER_DIR
 make
 make install
 if [ $? != 0 ]; then
@@ -231,6 +232,8 @@ if [ "$FRESH_PYTHON" ] || [[ ! $(pip --version) == *$PIP_VERSION* ]]; then
   bpwatch start install_setuptools
     # Prepare it for the real world
     puts-step "Installing Setuptools ($SETUPTOOLS_VERSION)"
+    echo "debug installing pip setup tools"
+    echo $BUILD_DIR
     cd $ROOT_DIR/vendor/
     tar zxf setuptools-$SETUPTOOLS_VERSION.tar.gz
     cd $ROOT_DIR/vendor/setuptools-$SETUPTOOLS_VERSION/
