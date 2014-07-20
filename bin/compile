@@ -114,6 +114,9 @@ if [ $? != 0 ]; then
   exit 1
 fi
 
+# Switch to bin context
+cd $BIN_DIR
+
 # Experimental pre_compile hook.
 bpwatch start pre_compile
   source $BIN_DIR/steps/hooks/pre_compile
