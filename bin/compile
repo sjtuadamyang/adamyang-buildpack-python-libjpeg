@@ -284,6 +284,7 @@ fi
 puts-step "Installing dependencies with pip"
 
 cat requirements.txt
+cat /app/requirements.txt
 
 [ ! "$FRESH_PYTHON" ] && bpwatch start pip_install
 [ "$FRESH_PYTHON" ] && bpwatch start pip_install_first
