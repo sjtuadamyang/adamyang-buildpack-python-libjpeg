@@ -89,9 +89,9 @@ ORIG_BUILD_DIR=$BUILD_DIR
 BUILD_DIR=$APP_DIR
 
 # Prepend proper path buildpack use.
-export PATH=$USER_DIR/lib/python/site-packages:$BUILD_DIR/.heroku/python/bin:$BUILD_DIR/.heroku/vendor/bin:$PATH
+export PATH=$USER_DIR/lib/python:$USER_DIR/bin:$BUILD_DIR/.heroku/python/bin:$BUILD_DIR/.heroku/vendor/bin:$PATH
 export PYTHONUNBUFFERED=1
-export PYTHONPATH=$USER_DIR/lib/python/site-packages:$PYTHONPATH
+export PYTHONPATH=$USER_DIR/lib/python:$USER_DIR/bin:$PYTHONPATH
 export LANG=en_US.UTF-8
 export C_INCLUDE_PATH=/app/.heroku/vendor/include:$BUILD_DIR/.heroku/vendor/include:/app/.heroku/python/include
 export CPLUS_INCLUDE_PATH=/app/.heroku/vendor/include:$BUILD_DIR/.heroku/vendor/include:/app/.heroku/python/include
@@ -237,7 +237,7 @@ if [ "$FRESH_PYTHON" ] || [[ ! $(pip --version) == *$PIP_VERSION* ]]; then
     cd $ROOT_DIR/vendor/
     tar zxf setuptools-$SETUPTOOLS_VERSION.tar.gz
     cd $ROOT_DIR/vendor/setuptools-$SETUPTOOLS_VERSION/
-    python setup.py install --install-base=$USER_DIR/lib/python/site-packages
+    python setup.py install --home=$USER_DIR
     #&> /dev/null
     cd $WORKING_DIR
   bpwatch stop install_setuptoools
@@ -252,7 +252,7 @@ if [ "$FRESH_PYTHON" ] || [[ ! $(pip --version) == *$PIP_VERSION* ]]; then
     echo "debug output"
     tar zxf pip-$PIP_VERSION.tar.gz
     cd $ROOT_DIR/vendor/pip-$PIP_VERSION/
-    python setup.py install --install-dir=$USER_DIR/lib/python/site-packages
+    python setup.py install --home=$USER_DIR
     #&> /dev/null
     which pip
     cd $WORKING_DIR
