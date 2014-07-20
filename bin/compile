@@ -108,7 +108,7 @@ if [ $? != 0 ]; then
   exit 1
 fi
 cd jpeg-9a
-./configure
+./configure --prefix=$BUILD_DIR/lib
 make
 make install
 if [ $? != 0 ]; then
@@ -116,6 +116,8 @@ if [ $? != 0 ]; then
   puts-warn "Aborting."
   exit 1
 fi
+set-env LIBRARY_PATH '$BUILD_DIR/lib:$LIBRARY_PATH'
+set-env LD_LIBRARY_PATH '$BUILD_DIR/lib:$LD_LIBRARY_PATH'
 
 # Switch back to repo's context
 cd $BUILD_DIR
