@@ -18,12 +18,12 @@ CACHE_DIR=$2
 ENV_DIR=$3
 USER_DIR='/app/user'
 
-echo '$BIN_DIR'
-echo '$ROOT_DIR'
-echo 'BUILD_DIR'
-echo 'CACHE_DIR'
-echo 'ENV_DIR'
-echo 'USER_DIR'
+echo $BIN_DIR
+echo $ROOT_DIR
+echo $BUILD_DIR
+echo $CACHE_DIR
+echo $ENV_DIR
+echo $USER_DIR
 
 CACHED_DIRS=".heroku"
 
