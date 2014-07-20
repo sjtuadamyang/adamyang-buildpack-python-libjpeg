@@ -204,7 +204,8 @@ if [ ! "$SKIP_INSTALL" ]; then
     # Prepare destination directory.
     mkdir -p .heroku/python
 
-    curl http://lang-python.s3.amazonaws.com/$STACK/runtimes/$PYTHON_VERSION.tar.gz -s | tar zxv -C .heroku/python &> /dev/null
+    curl http://lang-python.s3.amazonaws.com/$STACK/runtimes/$PYTHON_VERSION.tar.gz -s | tar zxv -C .heroku/python 
+    #&> /dev/null
     if [[ $? != 0 ]] ; then
       puts-warn "Requested runtime ($PYTHON_VERSION) is not available for this stack ($STACK)."
       puts-warn "Aborting.  More info: https://devcenter.heroku.com/articles/python-support"
@@ -233,7 +234,7 @@ if [ "$FRESH_PYTHON" ] || [[ ! $(pip --version) == *$PIP_VERSION* ]]; then
     cd $ROOT_DIR/vendor/
     tar zxf setuptools-$SETUPTOOLS_VERSION.tar.gz
     cd $ROOT_DIR/vendor/setuptools-$SETUPTOOLS_VERSION/
-    python setup.py install 
+    python setup.py install --prefix=$BUILD_DIR
     #&> /dev/null
     cd $WORKING_DIR
   bpwatch stop install_setuptoools
@@ -248,7 +249,7 @@ if [ "$FRESH_PYTHON" ] || [[ ! $(pip --version) == *$PIP_VERSION* ]]; then
     echo "debug output"
     tar zxf pip-$PIP_VERSION.tar.gz
     cd $ROOT_DIR/vendor/pip-$PIP_VERSION/
-    python setup.py install 
+    python setup.py install --prefix=$BUILD_DIR
     #&> /dev/null
     which pip
     cd $WORKING_DIR
