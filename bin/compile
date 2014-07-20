@@ -276,7 +276,7 @@ bpwatch stop pylibmc_install
 # Install Mercurial if it appears to be required.
 if (grep -Fiq "hg+" requirements.txt) then
   bpwatch start mercurial_install
-    /app/user/bin/pip install  mercurial | cleanup | indent
+    pip install  mercurial | cleanup | indent
   bpwatch stop mercurial_install
 fi
 
@@ -287,7 +287,7 @@ puts-step "Installing dependencies with pip"
 [ ! "$FRESH_PYTHON" ] && bpwatch start pip_install
 [ "$FRESH_PYTHON" ] && bpwatch start pip_install_first
 
-/app/user/bin/pip install -r requirements.txt --exists-action=w --src=./.heroku/src --allow-all-external  | cleanup | indent
+pip install -r requirements.txt --exists-action=w --src=./.heroku/src --allow-all-external  | cleanup | indent
 
 [ ! "$FRESH_PYTHON" ] && bpwatch stop pip_install
 [ "$FRESH_PYTHON" ] && bpwatch stop pip_install_first
