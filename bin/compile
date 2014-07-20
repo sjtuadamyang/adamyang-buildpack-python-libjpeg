@@ -122,8 +122,6 @@ bpwatch start pre_compile
   source $BIN_DIR/steps/hooks/pre_compile
 bpwatch stop pre_compile
 
-
-
 # If no requirements given, assume `setup.py develop`.
 if [ ! -f requirements.txt ]; then
   echo "-e ." > requirements.txt
@@ -237,6 +235,9 @@ if [ "$FRESH_PYTHON" ] || [[ ! $(pip --version) == *$PIP_VERSION* ]]; then
     puts-step "Installing Pip ($PIP_VERSION)"
 
     cd $ROOT_DIR/vendor/
+    pwd
+    ls -lh
+    echo "debug output"
     tar zxf pip-$PIP_VERSION.tar.gz
     cd $ROOT_DIR/vendor/pip-$PIP_VERSION/
     python setup.py install &> /dev/null
