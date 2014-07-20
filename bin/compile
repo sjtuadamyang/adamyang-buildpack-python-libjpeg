@@ -235,12 +235,14 @@ if [ "$FRESH_PYTHON" ] || [[ ! $(pip --version) == *$PIP_VERSION* ]]; then
     puts-step "Installing Pip ($PIP_VERSION)"
 
     cd $ROOT_DIR/vendor/
+    #debug
     pwd
     ls -lh
     echo "debug output"
     tar zxf pip-$PIP_VERSION.tar.gz
     cd $ROOT_DIR/vendor/pip-$PIP_VERSION/
     python setup.py install &> /dev/null
+    which pip
     cd $WORKING_DIR
 
   bpwatch stop install_pip
