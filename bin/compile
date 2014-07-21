@@ -197,6 +197,8 @@ if [ ! $STACK = $CACHED_PYTHON_STACK ]; then
   bpwatch stop uninstall_python
 fi
 
+echo "debug python installation"
+which python
 
 if [ ! "$SKIP_INSTALL" ]; then
   bpwatch start install_python
