@@ -197,11 +197,6 @@ if [ ! $STACK = $CACHED_PYTHON_STACK ]; then
   bpwatch stop uninstall_python
 fi
 
-echo "debug python installation"
-echo $PATH
-ls /app/.heroku/python/bin
-which python
-
 if [ ! "$SKIP_INSTALL" ]; then
   bpwatch start install_python
     puts-step "Installing runtime ($PYTHON_VERSION)"
@@ -226,6 +221,11 @@ if [ ! "$SKIP_INSTALL" ]; then
 
   hash -r
 fi
+
+echo "debug python installation"
+echo $PATH
+ls /app/.heroku/python/bin
+which python
 
 # If Pip isn't up to date:
 if [ "$FRESH_PYTHON" ] || [[ ! $(pip --version) == *$PIP_VERSION* ]]; then
